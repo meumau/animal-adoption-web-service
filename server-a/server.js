@@ -61,13 +61,32 @@ app.post('/animals/:id/adopt', async (req, res) => {
             return res.status(400).json({ error: "Tästä eläimestä on jo vireillä adoptiohakemus tai se ei ole adoptoitavissa." });
         }
 
-        // Tähän välitys server b:lle kun server b tehty
+        // Välitetään adoptiohakemus server b:lle
+        const serverBResponse = await fetch('http://localhost:8000/adoptions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...adoptionData,
+                animalId: Number(animalId)
+            }),
+        });
 
-        res.json({
+        const serverBResult = await serverBResponse.json();
+
+        if (!serverBResponse.ok) {
+            return res.status(serverBResponse.status).json({
+                error: serverBResult.error || "Virhe adoption tallennuksessa Server B:ssä"
+            });
+        }
+
+        // Palautetaan onnistunut vastaus
+        res.status(201).json({
             success: true,
-            message: "Adoptiohakemus vastaanotettu",
+            message: "Adoptiohakemus välitetty ja tallennettu onnistuneesti!",
             animalId: animalId,
-            data: adoptionData
+            serverBResponse: serverBResult
         });
 
     } catch (err) {
