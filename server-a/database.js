@@ -18,7 +18,7 @@ function initDatabase() {
             age TEXT NOT NULL,
             breed TEXT NOT NULL,
             description TEXT NOT NULL,
-            image_url TEXT NOT NULL,
+            image_url TEXT NOT NULL DEFAULT '/images/placeholder.jpg',
             status TEXT DEFAULT 'Adoptoitavissa'
         )
   `);
