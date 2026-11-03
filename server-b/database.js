@@ -1,5 +1,12 @@
+const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
+
+// Varmista että database-kansio on olemassa
+const dbDir = path.join(__dirname, '../database');
+if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+}
 
 // Määritellään polku
 const dbPath = path.join(__dirname, '../database/animals.db');
