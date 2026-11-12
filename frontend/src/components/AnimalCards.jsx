@@ -5,6 +5,7 @@ export default function AnimalCards({ animals }) {
         <div className="cardscontainer">
             {animals.map((animal, index) => (
                 <div className="card" key={index}>
+                    <div className="statuslabel">{animal.status}</div>
                     <img className="cardimage" src={`${API_URL}${animal.image_url}`} alt={animal.name} />
                     <h3>{animal.name}</h3>
                     <button className="cardbutton">Lue minusta</button>
