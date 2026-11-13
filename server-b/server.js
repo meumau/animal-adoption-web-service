@@ -21,7 +21,7 @@ app.post('/adoptions', async (req, res) => {
 
         // Tallennetaan adoptiohakemus applications-tauluun
         const insertApplication = db.prepare(`
-            INSERT INTO applications (name, phone, email, address, animal, description)
+            INSERT INTO applications (name, phone, email, address, animalId, description)
             VALUES (?, ?, ?, ?, ?, ?)
         `);
 
