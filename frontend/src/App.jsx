@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import { useAnimalData } from './hooks/useAnimalData'
 import AnimalCards from './components/AnimalCards'
+import { useEffect } from 'react'
 
 function App() {
 
@@ -11,6 +12,11 @@ function App() {
     animalsLoading,
     animalsError
   } = useAnimalData();
+
+  // Skrollataan ylös, kun sivu ladataan
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <>
