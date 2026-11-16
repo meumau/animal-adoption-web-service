@@ -1,0 +1,33 @@
+services:
+  server-a:
+    build: # Rakennetaan dockerfilen pohjalta
+      dockerfile: ./server-a/dockerfile
+    ports: # Ohjataan isäntäkoneen portti 3000 kontin porttiin 3000
+      - "3000:3000"
+    # Server A löytää server B:n Docker-nimellä
+    environment:
+      SERVER_B_URL: http://server-b:8000
+    # Liitetään koneen database-kansio konttiin, jotta data säilyy
+    volumes:
+      - ./database:/app/database
+    depends_on:
+      - server-b
+
+  server-b:
+    build:
+      dockerfile: ./server-b/dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./database:/app/database
+
+  frontend:
+    build:
+      dockerfile: ./frontend/dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      API_PROXY_TARGET: http://server-a:3000
+    depends_on:
+      - server-a
+      - server-b

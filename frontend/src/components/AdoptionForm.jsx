@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = '/api';
 
 export default function AdoptionForm({ animal }) {
 

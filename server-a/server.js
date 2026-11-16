@@ -8,6 +8,7 @@ const {
 } = require('./database');
 
 const app = express();
+const serverBUrl = process.env.SERVER_B_URL || 'http://localhost:8000';
 
 app.use(express.json());
 app.use(cors());
@@ -62,7 +63,7 @@ app.post('/animals/:id/adopt', async (req, res) => {
         }
 
         // Välitetään adoptiohakemus server b:lle
-        const serverBResponse = await fetch('http://localhost:8000/adoptions', {
+        const serverBResponse = await fetch(`${serverBUrl}/adoptions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
