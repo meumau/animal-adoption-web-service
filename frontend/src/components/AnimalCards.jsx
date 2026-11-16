@@ -10,6 +10,10 @@ export default function AnimalCards({ animals }) {
                     <div className="statuslabel">{animal.status}</div>
                     <img className="cardimage" src={`${API_URL}${animal.image_url}`} alt={animal.name} />
                     <h3>{animal.name}</h3>
+                    <div className="cardlabels">
+                        <span className="cardlabel">{animal.type}</span>
+                        <span className="cardlabel">{animal.age}</span>
+                    </div>
                     {/* Kortissa on linkki eläimen sivulle */}
                     <Link to={`/animal/${animal.id}`} className="cardbutton">
                         Lue minusta

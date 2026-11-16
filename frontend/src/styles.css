@@ -122,6 +122,22 @@ body {
     font-weight: 600;
 }
 
+.cardlabels {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 8px 16px;
+}
+
+.cardlabel {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: 14px;
+}
+
 .cardbutton {
     align-self: center;
     margin-top: auto;
