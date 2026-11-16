@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = '/api';
 
 export default function AdoptionForm({ animal }) {
+
+    const navigate = useNavigate();
 
     // Määritellään lomakkeen data
     const [formData, setFormData] = useState({
@@ -13,7 +16,6 @@ export default function AdoptionForm({ animal }) {
         description: ''
     });
 
-    const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(null);
 
 
@@ -46,20 +48,11 @@ export default function AdoptionForm({ animal }) {
                 throw new Error(result.error || 'Hakemuksen lähetys epäonnistui.');
             }
 
-            setSubmitted(true);
+            navigate('/thankyou', { replace: true });
         } catch (err) {
             setError(err.message);
         }
     };
-
-    // Kun lomake on lähetetty, näytetään kiitosviesti
-    if (submitted) {
-        return (
-            <section className="formcontainer" aria-live="polite">
-                <p className="success-message">Kiitos adoptiohakemuksestasi! Olemme sinuun pian yhteydessä.</p>
-            </section>
-        );
-    }
 
     // Jos eläin on varattu, lomake on piilotettu eli sisältöä ei ole
     if (animal.status !== "Adoptoitavissa") {

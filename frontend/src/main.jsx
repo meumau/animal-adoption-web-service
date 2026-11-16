@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from './App.jsx'
 import Animal from './Animal.jsx'
+import ThankYou from './ThankYouPage.jsx'
 
 const queryClient = new QueryClient()
 
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/animal/:id" element={<Animal />} />
+            <Route path="/thankyou" element={<ThankYou />} />
           </Routes>
         </BrowserRouter>
     </QueryClientProvider>
