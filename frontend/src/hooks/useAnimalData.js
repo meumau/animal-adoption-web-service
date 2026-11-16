@@ -29,7 +29,8 @@ export function useAnimal(id) {
         queryKey: ['animal', id],
         queryFn: async () => {
             const res = await fetch(`${API_URL}/animals/${id}`);
-            if (!res.ok) throw new Error('Eläintä ei löytynyt');
+            if (res.status === 404) return null;
+            if (!res.ok) throw new Error('Eläimen haku epäonnistui');
             return res.json();
         },
         enabled: !!id // Hakee vain jos ID on olemassa
